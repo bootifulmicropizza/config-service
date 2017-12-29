@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: config-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: config-service
+    spec:
+      containers:
+      - name: config-service
+        image: iancollington/bootifulmicropizza_config-service
+        imagePullPolicy: Always
+        env:
+          - name: BOOTIFUL_MICRO_PIZZA_ENV
+            value: prod
+          - name: CONFIG_LOCATION
+            value: https://github.com/bootifulmicropizza/configuration.git
+          - name: BUILD_DATE
+            value: BUILD_DATE_PLACEHOLDER
+        resources:
+          requests:
+            cpu: "0.25"
+            memory: 768Mi
+          limits:
+            cpu: "1"
+            memory: 1536Mi
+        ports:
+        - containerPort: 8888
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8888
+          initialDelaySeconds: 120
+          timeoutSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8888
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
