@@ -9,6 +9,9 @@ phases:
       - apt-get update -y
       - apt-get install -y openjdk-8-jdk
       - apt-get install -y maven
+  pre-build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region eu-west-1)
   build:
     commands:
       - echo Build started on `date`
@@ -17,7 +20,8 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn package
-      - docker build -t config-service .
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/config-service:latest .
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/config-service:latest
 artifacts:
   files:
     - target/config-service.jar
