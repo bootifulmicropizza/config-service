@@ -20,8 +20,8 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn package
-      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/config-service:latest .
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/config-service:latest
+      - docker build -t $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG .
+      - docker push $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG
 artifacts:
   files:
     - target/config-service.jar
