@@ -9,6 +9,7 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn package
+      - docker build -t config-service .
 artifacts:
   files:
     - target/config-service.jar
