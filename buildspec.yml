@@ -14,14 +14,11 @@ phases:
       - $(aws ecr get-login --no-include-email --region eu-west-1)
   build:
     commands:
-      - echo Build started on `date`
-      - mvn test
+      - mvn package
   post_build:
     commands:
-      - echo Build completed on `date`
-      - mvn package
-      - docker build -t $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG .
-      - docker push $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG
-artifacts:
-  files:
-    - target/config-service.jar
+      - MVN_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version)
+      - docker build -t $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION .
+      - docker push $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION
+      - docker tag $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION $IMAGE_REPO/$IMAGE_NAME:latest
+      - docker push $IMAGE_REPO/$IMAGE_NAME:latest
