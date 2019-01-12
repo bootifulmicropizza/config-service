@@ -20,6 +20,8 @@ phases:
     commands:
       - echo Build completed on `date`
       - mvn package
+      - echo $IMAGE_REPO
+      - echo IMAGE_REPO above
       - docker build -t $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG .
       - docker push $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG
 artifacts:
