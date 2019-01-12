@@ -1,5 +1,3 @@
 # config-service
 
-![](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiR2Jhd01UbW85TDZDSEtnRDB1MHpQRHA5RGRpYzJ6VkNpVDZxTXVMemZHc0x5bTNaYmZwaDBmcnNacXFxc2NWYUZIYjJ6MWgyQmNKQmhyVVhMUGU5TEVFPSIsIml2UGFyYW1ldGVyU3BlYyI6IlkzZlJNS3NPanpOWUtZS1YiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
-
 Standard Spring Cloud Config module to provide a centralised configuration server for the Bootiful Micro Pizza application.
