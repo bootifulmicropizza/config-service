@@ -22,3 +22,6 @@ phases:
       - docker push $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION
       - docker tag $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION $IMAGE_REPO/$IMAGE_NAME:latest
       - docker push $IMAGE_REPO/$IMAGE_NAME:latest
+cache:
+  paths:
+    - '/root/.m2/**/*'
