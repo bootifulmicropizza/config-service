@@ -17,7 +17,7 @@ phases:
       - mvn package
   post_build:
     commands:
-      - MVN_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version)
+      - MVN_VERSION=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
       - docker build -t $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION .
       - docker push $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION
       - docker tag $IMAGE_REPO/$IMAGE_NAME:$MVN_VERSION $IMAGE_REPO/$IMAGE_NAME:latest
